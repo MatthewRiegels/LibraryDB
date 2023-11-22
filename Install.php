@@ -55,3 +55,5 @@ CREATE TABLE TblAuthors (
     Forename VARCHAR(30) NOT NULL,
     Surname VARCHAR(30) NOT NULL
 );");
+$stmt->execute();
+$stmt->closeCursor();
