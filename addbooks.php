@@ -10,19 +10,19 @@ echo("title: " . $_POST["title"]."<br>");
 echo("author: " . $_POST["author"]."<br>");
 
 $author_name = $_POST["author"];
-$stmt = $conn->prepare("SELECT AuthorID FROM TblAuthors WHERE Surname = $author_name");
+$stmt = $conn->prepare("SELECT AuthorID FROM TblAuthors WHERE Surname = '" . $author_name . "'");
 $stmt->execute();
 if($stmt->fetch(PDO::FETCH_ASSOC)){
     $author_id = $stmt->fetch(PDO::FETCH_ASSOC)["AuthorID"];
+    $stmt = $conn->prepare("INSERT INTO TblBooks (BookID,ISBN,Title,AuthorID)VALUES (null,:isbn,:title,:authorid)");
+    $stmt->bindParam(':isbn', $_POST["isbn"]);
+    $stmt->bindParam(':title', $_POST["title"]);
+    $stmt->bindParam(':authorid', $author_id);
+    $stmt->execute();
+    $conn=null;
+    echo("success: " . $author_id);
 }
 else{
     echo('no author with surname "' . $_POST["author"] . '"');
 }
-
-$stmt = $conn->prepare("INSERT INTO TblBooks (BookID,ISBN,Title,AuthorID)VALUES (null,:isbn,:title,:authorid)");
-$stmt->bindParam(':isbn', $_POST["isbn"]);
-$stmt->bindParam(':title', $_POST["title"]);
-$stmt->bindParam(':authorid', $author_id);
-$stmt->execute();
-$conn=null;
 ?>

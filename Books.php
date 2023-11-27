@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Books
-        </title>
+        <title>Books</title>
     </head>
     <body>
         <a href="index.html">back to the homepage</a><br><br>
@@ -21,7 +20,6 @@
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             echo('"' . $row["Title"] . '"' . ', ' . $row["AuthorID"] . " (" . $row["ISBN"] . " )" . "<br>");
-            // show author names here
         }
         ?>
     </body>
