@@ -1,5 +1,5 @@
 <?php
-header('Location: books.php'); // if it breaks, comment this line first
+header('Location: authors.php'); // if it breaks, comment this line first
 
 include_once("connection.php");
 
