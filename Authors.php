@@ -18,7 +18,7 @@
         $stmt = $conn->prepare("SELECT * FROM TblAuthors");
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            echo($row["Surname"] . ', ' . $row["Forename"] . "<br>");
+            echo($row["Forename"] . ' ' . $row["Surname"] . "<br>");
         }
         ?>
     </body>

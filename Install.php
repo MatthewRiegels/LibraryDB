@@ -6,7 +6,8 @@ CREATE TABLE TblBooks (
     BookID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     ISBN VARCHAR(17) NOT NULL,
     Title VARCHAR(255) NOT NULL,
-    AuthorID INT(4) UNSIGNED NOT NULL
+    AuthorID INT(4) UNSIGNED NOT NULL,
+    Type VARCHAR(10) NOT NULL
 );");
 $stmt->execute();
 $stmt->closeCursor();

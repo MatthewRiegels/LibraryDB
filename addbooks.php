@@ -14,10 +14,11 @@ $stmt = $conn->prepare("SELECT AuthorID FROM TblAuthors WHERE Surname = '" . $au
 $stmt->execute();
 if($stmt->fetch(PDO::FETCH_ASSOC)){
     $author_id = $stmt->fetch(PDO::FETCH_ASSOC)["AuthorID"];
-    $stmt = $conn->prepare("INSERT INTO TblBooks (BookID,ISBN,Title,AuthorID)VALUES (null,:isbn,:title,:authorid)");
+    $stmt = $conn->prepare("INSERT INTO TblBooks (BookID,ISBN,Title,AuthorID,Type)VALUES (null,:isbn,:title,:authorid,:type)");
     $stmt->bindParam(':isbn', $_POST["isbn"]);
     $stmt->bindParam(':title', $_POST["title"]);
     $stmt->bindParam(':authorid', $author_id);
+    $stmt->bindParam(':type', $_POST["type"]);
     $stmt->execute();
     $conn=null;
     echo("success: " . $author_id);

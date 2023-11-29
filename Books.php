@@ -9,7 +9,19 @@
         <form action="addbooks.php" method = "post">
             ISBN:<input type="text" name="isbn"><br>
             Title:<input type="text" name="title"><br>
-            Author:<input type="text" name="author"><br>
+            Author:<select name="author">
+                <?php
+                include_once('connection.php');
+                $stmt = $conn->prepare("SELECT * FROM TblAuthors ORDER BY Surname ASC");
+                $stmt->execute();
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    echo('<option value='.$row["AuthorID"].'>'.$row["Forename"].' '.$row["Surname"].'</option>');
+                }
+                ?>
+            </select><br>
+            Type:<input type="text" name="type"><br>
             <input type="submit" value="Add Book">
         </form>
 
@@ -19,7 +31,7 @@
         $stmt = $conn->prepare("SELECT * FROM TblBooks");
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            echo('"' . $row["Title"] . '"' . ', ' . $row["AuthorID"] . " (" . $row["ISBN"] . " )" . "<br>");
+            echo('"' . $row["Title"] . '", ' . $row["AuthorID"] . " (" . $row["ISBN"] . ", " . $row["Type"] . " )" . "<br>");
         }
         ?>
     </body>
