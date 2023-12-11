@@ -31,7 +31,7 @@ $stmt->closeCursor();
 $stmt = $conn->prepare("DROP TABLE IF EXISTS TblUsers;
 CREATE TABLE TblUsers (
     UserID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    Gender VARCHAR(1) NOT NULL,
+    Title VARCHAR(10) NOT NULL,
     Surname VARCHAR(30) NOT NULL,
     Forename VARCHAR(30) NOT NULL,
     Password VARCHAR(30) NOT NULL,

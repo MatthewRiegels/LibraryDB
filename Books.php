@@ -31,7 +31,10 @@
         $stmt = $conn->prepare("SELECT * FROM TblBooks");
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            echo('"' . $row["Title"] . '", ' . $row["AuthorID"] . " (" . $row["ISBN"] . ", " . $row["Type"] . " )" . "<br>");
+            $stmt2 = $conn->prepare("SELECT * FROM TblAuthors WHERE AuthorID = " . $row['AuthorID']);
+            $stmt2->execute();
+            $AuthAssoc = $stmt2->fetch(PDO::FETCH_ASSOC);
+            echo('"' . $row["Title"] . '", ' . $AuthAssoc['Forename'] . ' ' . $AuthAssoc['Surname'] . ', (' . $row["ISBN"] . ', ' . $row["Type"] . ')' . '<br>');
         }
         ?>
     </body>

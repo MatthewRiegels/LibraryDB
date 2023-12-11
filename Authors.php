@@ -15,7 +15,7 @@
         <!-- show all authors -->
         <?php
         include_once('connection.php');
-        $stmt = $conn->prepare("SELECT * FROM TblAuthors");
+        $stmt = $conn->prepare("SELECT * FROM TblAuthors ORDER BY surname ASC");
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             echo($row["Forename"] . ' ' . $row["Surname"] . "<br>");
