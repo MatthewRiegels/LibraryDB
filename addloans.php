@@ -9,7 +9,7 @@ echo("book: " . $_POST["book"]."<br>");
 echo("user: " . $_POST["user"]."<br>");
 $dateborrow= new DateTime(date("Y-m-d"));
 $loanduration = new DateInterval("P14D");
-$datereturn=date_add($loanduration,$dateborrow);
+$datereturn=date_add($loanduration,$dateborrow);// broken
 $stmt = $conn->prepare("INSERT INTO TblLoans (BookID,UserID,IssueDate,ReturnDate)VALUES (:book,:user,:issuedate,:returndate)");
 $stmt->bindParam(':book', $_POST["book"]);
 $stmt->bindParam(':user', $_POST["user"]);

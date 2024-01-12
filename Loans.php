@@ -40,7 +40,15 @@
         $stmt = $conn->prepare("SELECT * FROM TblLoans");
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            echo($row["UserID"] . ' ' . $row["BookID"]);
+            $stmt2 = $conn->prepare("SELECT * FROM TblBooks WHERE BookID = " . $row["BookID"]);
+            $stmt2->execute();
+            $booktitle = $stmt2->fetch(PDO::FETCH_ASSOC)["Title"];
+
+            $stmt3 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID = " . $row["UserID"]);
+            $stmt3->execute();
+            $arr = $stmt3->fetch(PDO::FETCH_ASSOC);
+            $username = $arr["Forename"] . ' ' . $arr["Surname"];
+            echo($username . ', ' . $booktitle);
         }
         ?>
     </body>
